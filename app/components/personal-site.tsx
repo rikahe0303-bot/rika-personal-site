@@ -92,6 +92,7 @@ export default function PersonalSite({ page }: { page: "skills" | "about" }) {
           <a href={asset("/")} aria-current={isHome ? "page" : undefined} onClick={() => setMenuOpen(false)}>首页 · 技能</a>
           <a href={asset("/about/")} aria-current={!isHome ? "page" : undefined} onClick={() => setMenuOpen(false)}>关于我</a>
           <a href={isHome ? asset("/about/#journal") : "#journal"} onClick={() => setMenuOpen(false)}>生活相册</a>
+          <a href={asset("/video/")} onClick={() => setMenuOpen(false)}>像素短片</a>
           <a href="#contact" onClick={() => setMenuOpen(false)}>联系我</a>
         </nav>
         <button ref={menuButton} className="menu-button" aria-expanded={menuOpen} aria-controls="navigation" aria-label={menuOpen ? "关闭菜单" : "打开菜单"} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={23}/> : <Menu size={23}/>}</button>

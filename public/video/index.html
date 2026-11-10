@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#231a41">
+  <title>水水的像素小宇宙 · 30 秒个人短片</title>
+  <meta name="description" content="我是何丽江，也可以叫我水水。用跳跳像素字、彩虹路和童趣音乐，带你走进我的个人世界。">
+  <meta property="og:title" content="水水的像素小宇宙">
+  <meta property="og:description" content="30 秒，走进我的个人世界。">
+  <meta property="og:image" content="https://rikahe0303-bot.github.io/rika-personal-site/video/poster.jpg">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <style>
+    @font-face{font-family:Pixel;src:url('pixel-font.woff2') format('woff2');font-display:swap}
+    :root{color-scheme:dark;--cream:#fff5e1;--mint:#a4eed0;--pink:#ffb4d9;--gold:#ffe28d}
+    *{box-sizing:border-box}body{margin:0;background:#231a41;color:var(--cream);font-family:system-ui,-apple-system,'PingFang SC',sans-serif;line-height:1.7}
+    body:before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at 15% 0,#51407488,transparent 55%),radial-gradient(ellipse at 90% 80%,#73446b55,transparent 55%)}
+    a{color:inherit;text-underline-offset:5px}a:focus-visible,video:focus-visible,summary:focus-visible{outline:3px solid var(--mint);outline-offset:6px}
+    .wrap{width:min(1080px,calc(100% - 48px));margin:auto}nav{display:flex;justify-content:space-between;gap:20px;padding:28px 0;font-size:14px}nav a{text-decoration:none}nav a:hover{color:var(--mint)}
+    header{text-align:center;padding:28px 0 36px}.eyebrow{font-family:Pixel,monospace;font-size:16px;color:var(--mint);letter-spacing:2px;margin:0 0 18px}
+    h1{font-family:Pixel,monospace;font-weight:400;font-size:clamp(32px,5.5vw,62px);line-height:1.4;margin:0 0 14px;text-shadow:4px 4px #684471}
+    h1 span:nth-child(3n+1){color:var(--gold)}h1 span:nth-child(3n+2){color:var(--pink)}h1 span:nth-child(3n){color:var(--mint)}
+    .intro{font-size:16px;color:#ded3ed;margin:0}.frame{border:5px solid #f7ead9;box-shadow:10px 10px 0 #8c76b7;background:#110d23;overflow:hidden}
+    video{display:block;width:100%;aspect-ratio:16/9;background:#110d23}.meta{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:26px 0 18px;color:#ded3ed;font-size:14px}
+    .actions{display:flex;gap:14px;flex-wrap:wrap;padding:10px 0 20px}.button{display:inline-block;text-decoration:none;padding:12px 22px;background:var(--mint);color:#28213d;box-shadow:4px 4px 0 #6a527e;font-weight:650}.button.secondary{background:var(--pink)}.button:hover{translate:0 -2px}.hint{font-size:13px;color:#c1b3d1;margin:0 0 32px}
+    details{padding:22px 0;border-top:1px solid #6d5787}summary{cursor:pointer;color:var(--gold)}details p{max-width:740px;color:#ded3ed}
+    footer{margin-top:34px;padding:26px 0 36px;border-top:1px solid #6d5787;display:flex;justify-content:space-between;gap:20px;font-size:13px;color:#c1b3d1}
+    .rainbow{height:20px;background:linear-gradient(to bottom,#ed707b 0 14%,#f4ab68 14% 28%,#f5d977 28% 42%,#8bcf9a 42% 56%,#6db8d2 56% 70%,#8c91df 70% 84%,#a77dd1 84%)}
+    @media(max-width:600px){.wrap{width:calc(100% - 28px)}header{padding-top:16px}.intro{font-size:14px}.frame{border-width:3px;box-shadow:6px 6px 0 #8c76b7}.button{flex:1;text-align:center;padding:12px 14px}footer{flex-direction:column;gap:8px}.eyebrow{font-size:14px}}
+    @media(prefers-reduced-motion:reduce){.button:hover{translate:none}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav aria-label="页面导航"><a href="../">← 返回个人网站</a><a href="../about/">关于水水 ↗</a></nav>
+    <main>
+      <header>
+        <p class="eyebrow">HELLO, MY PIXEL WORLD</p>
+        <h1><span>水水的</span><span>像素</span><span>小宇宙</span></h1>
+        <p class="intro">把日常装进像素世界。很高兴，在这里遇见你。</p>
+      </header>
+      <div class="frame">
+        <video id="film" controls playsinline preload="metadata" poster="poster.jpg" aria-label="水水的30秒像素个人介绍短片">
+          <source src="rika-pixel.mp4" type="video/mp4">
+          <track kind="captions" src="captions.vtt" srclang="zh" label="中文口播">
+          你的浏览器暂不支持在线播放，请<a href="rika-pixel.mp4">下载 MP4</a>观看。
+        </video>
+      </div>
+      <div class="meta"><span>像素跳跳字版 · 中文口播 · 原创童趣配乐</span><span>30 秒 / 1080p / 横屏</span></div>
+      <div class="actions"><a class="button" href="rika-pixel.mp4" download="水水的像素小宇宙.mp4">下载 MP4</a><a class="button secondary" href="rika-pixel-hevc.mp4" download="水水的像素小宇宙_HEVC.mp4">下载 H.265 版</a></div>
+      <p class="hint">在线播放使用兼容版。点击播放器右下角，可全屏观看或开启中文口播字幕。</p>
+      <details><summary>读一读视频里的我</summary><p>你好，我是何丽江，也可以叫我水水。来自云南，在西安生活。慢热，也浪漫。我的两个身份：IP 操盘手，情感陪伴师。</p><p>喜欢旅行，走进山野，找回自己的节奏。看展、拼豆，和胖虎散步。小事也值得喜欢。认真表达，也认真倾听。很高兴认识你。</p></details>
+    </main>
+    <footer><span>何丽江 / 水水 · 认真表达，也认真倾听。</span><a href="https://github.com/rikahe0303-bot/rika-personal-site/tree/main/remotion">查看视频源码 ↗</a></footer>
+  </div>
+  <div class="rainbow" aria-hidden="true"></div>
+</body>
+</html>

@@ -4,6 +4,7 @@
 
 - 技能首页：https://rikahe0303-bot.github.io/rika-personal-site/
 - 关于我：https://rikahe0303-bot.github.io/rika-personal-site/about/
+- 像素短片：https://rikahe0303-bot.github.io/rika-personal-site/video/
 - 源码：https://github.com/rikahe0303-bot/rika-personal-site
 - 视觉参考：https://www.framer.com/marketplace/templates/calmco/
 - 个人说明书：https://my.feishu.cn/wiki/PwFMwXy47i7csPkxGR7cD1k86Pf
@@ -41,6 +42,8 @@ npm run build:pages
 - `public/favicon.svg`：站点图标。
 - `scripts/build-pages.mjs`：GitHub Pages 构建脚本。
 - `.github/workflows/pages.yml`：自动发布流程。
+- `public/video/`：最新像素跳跳字版的在线播放页面、H.264 / H.265 成片与字幕。
+- `remotion/`：可独立安装和编辑的视频源码、照片、中文像素字体、口播和配乐生成器。
 
 ## 页面与交互
 
