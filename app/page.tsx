@@ -1,94 +1,114 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowRight, ArrowUpRight, Camera, Check, ChevronLeft, ChevronRight, Copy, Gamepad2, Heart, MapPin, Menu, Mountain, Palette, Phone, Plus, Sparkles, X, Zap } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, Copy, Menu, Minus, Plus, X } from "lucide-react";
 
 const asset = (path: string) => `${process.env.NEXT_PUBLIC_BASE_PATH || ""}${path}`;
-const phone = "19526880781";
 const source = "https://my.feishu.cn/wiki/PwFMwXy47i7csPkxGR7cD1k86Pf";
-const moments = [
-  { image: "image3.jpeg", title: "把日落装进口袋", type: "在路上", caption: "山顶的风，和刚刚好的晚霞。", label: "SUNSET COLLECTOR" },
-  { image: "image6.jpeg", title: "在色彩里停留一下", type: "小日常", caption: "去看展，在别人的色彩里待一会儿。", label: "A LITTLE ART BREAK" },
-  { image: "image9.jpeg", title: "和大自然打个招呼", type: "在路上", caption: "出门走走，总会遇见意料之外的可爱。", label: "OUTSIDE IS A GOOD IDEA" },
-  { image: "image11.jpeg", title: "我的可爱搭子：胖虎", type: "小日常", caption: "介绍一下，这是胖虎，我的干儿子。", label: "MEET MY LITTLE FRIEND" },
-  { image: "image10.jpeg", title: "一点一点，拼出快乐", type: "小日常", caption: "拼豆的时间里，快乐也可以很简单。", label: "SMALL THINGS, BIG JOY" },
+const phone = "19526880781";
+const photographs = [
+  { image: "image3.jpeg", title: "把日落，留在心里。", english: "THE LAST LIGHT", type: "在路上", caption: "山顶的风，和刚刚好的晚霞。" },
+  { image: "image6.jpeg", title: "在别人的色彩里，停留。", english: "A QUIET AFTERNOON", type: "小日常", caption: "去看展，给好奇心留一点空间。" },
+  { image: "image10.jpeg", title: "小小的事，也值得投入。", english: "MADE OF LITTLE JOYS", type: "小日常", caption: "一颗一颗拼起来的，是简单而具体的快乐。" },
+  { image: "image11.jpeg", title: "和胖虎，一起慢慢走。", english: "MY LITTLE COMPANION", type: "小日常", caption: "这是胖虎，我的干儿子，也是日常里可爱的陪伴。" },
+  { image: "image9.jpeg", title: "出发，就有新的相遇。", english: "SOMEWHERE OUTSIDE", type: "在路上", caption: "走进山野，总会碰见计划之外的可爱。" },
+  { image: "image2.jpeg", title: "把自己，还给山野。", english: "A LITTLE CLOSER TO NATURE", type: "在路上", caption: "吹吹风，走走路。在大自然里，找回自己的节奏。" },
 ];
 const interests = [
-  { icon: Mountain, name: "去山野充电", english: "OUTDOOR DAYS", text: "走进山野，吹吹风。旅行和户外，是我亲近世界的方式。" },
-  { icon: Gamepad2, name: "在游戏里冒险", english: "PLAYER MODE", text: "爱出门，也能宅得很开心。试试新游戏，探索另一个世界。" },
-  { icon: Palette, name: "看展，也看生活", english: "ART & CURIOSITY", text: "在不同的色彩和表达里，给自己留一点好奇和想象的空间。" },
-  { icon: Heart, name: "收藏小小快乐", english: "LITTLE HAPPY THINGS", text: "拼豆、陪胖虎、记录日常。那些不起眼的小事，也很值得。" },
+  { title: "走进山野", english: "WANDER", text: "喜欢旅行，也喜欢户外。让脚步离开熟悉的日常，在山风、晚霞和陌生的路上，遇见更自在的自己。", tags: ["旅行", "户外", "自然"], photo: 4 },
+  { title: "留一点艺术", english: "NOTICE", text: "去看展，在一幅画前停留。喜欢观察不同的色彩和表达，也愿意为生活里微小的美多看一眼。", tags: ["看展", "色彩", "好奇心"], photo: 1 },
+  { title: "享受小日常", english: "SLOW DOWN", text: "爱出门，也能宅得很开心。游戏里的冒险，拼豆时的专注，都是给自己充电的方式。", tags: ["游戏", "拼豆", "放松"], photo: 2 },
+  { title: "与可爱作伴", english: "CONNECT", text: "和胖虎待在一起，认真听朋友分享。舒服的陪伴不必热闹，真诚、自然，有彼此的空间就很好。", tags: ["胖虎", "陪伴", "倾听"], photo: 3 },
 ];
-const questions = [
-  ["你是一个什么样的人？", "我是一个慢热的 INFJ，双鱼座。表面可能很平静，心里却已经炸开了花。温和、认真，也重视彼此的边界。"],
-  ["从哪里来，现在在哪里生活？", "我来自云南，现在在西安生活。毕业于西南科技大学，主修信息管理。"],
-  ["怎样才能和你快速熟悉？", "一起做喜欢的事就很好。约旅行、玩户外，或者一起试试新游戏。自然一点，真诚一点，不用急着熟悉。"],
-  ["可以找你聊些什么？", "旅行、游戏、看展、拼豆，或者生活里的小事，都可以。也愿意认真听你说说心事，做一个朋友和倾听者。"],
-  ["怎么联系你？", "电话是 19526880781。页面底部可以点击拨号或复制号码，也可以继续翻阅我的飞书个人说明书。"],
+const faqs = [
+  ["你是一个什么样的人？", "我是何丽江，一个慢热的 INFJ，双鱼座。表面可能很平静，心里却已经炸开了花。温和、认真，也重视彼此的边界。"],
+  ["从哪里来，现在在哪里？", "我来自云南，现在在西安生活。毕业于西南科技大学，主修信息管理。"],
+  ["怎样才能和你慢慢熟悉？", "一起做喜欢的事就很好：旅行、户外、看展，或者一起试试新游戏。给彼此一点时间，自然一点，真诚一点。"],
+  ["可以找你聊些什么？", "旅行、游戏、拼豆，或者日常的小事都可以。也愿意认真听你说说心事，做一个朋友和倾听者。"],
+  ["怎么联系你？", "电话是 19526880781。你可以在页面下方直接拨号或复制号码，也可以打开飞书里的完整个人说明书。"],
 ];
 
-function Star({ className = "" }: { className?: string }) {
-  return <svg className={className} viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="m50 3 8 28 25-16-15 26 29 9-29 9 15 26-25-16-8 28-8-28-25 16 15-26L3 50l29-9-15-26 25 16Z" stroke="#201f1d" strokeWidth="3" strokeLinejoin="round"/></svg>;
+function Emblem({ className = "" }: { className?: string }) {
+  return <svg viewBox="0 0 64 64" className={className} fill="none" aria-hidden="true"><circle cx="32" cy="32" r="23" stroke="currentColor" strokeWidth=".75"/><path d="M32 4v10M32 50v10M4 32h10M50 32h10" stroke="currentColor" strokeWidth=".75"/><path d="M32 18c0 9-5 14-14 14 9 0 14 5 14 14 0-9 5-14 14-14-9 0-14-5-14-14Z" stroke="currentColor" strokeWidth=".75"/><circle cx="32" cy="4" r="1.4" fill="currentColor"/><circle cx="60" cy="32" r="1.4" fill="currentColor"/><circle cx="32" cy="60" r="1.4" fill="currentColor"/><circle cx="4" cy="32" r="1.4" fill="currentColor"/></svg>;
 }
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [interest, setInterest] = useState(0);
   const [filter, setFilter] = useState("全部");
   const [showAll, setShowAll] = useState(false);
-  const [selected, setSelected] = useState(0);
-  const [isOpen, setIsOpen] = useState(false);
+  const [photo, setPhoto] = useState(0);
+  const [photoOpen, setPhotoOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [copyError, setCopyError] = useState(false);
-  const modal = useRef<HTMLDialogElement>(null);
+  const dialog = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLButtonElement | null>(null);
+  const menuButton = useRef<HTMLButtonElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const filtered = moments.map((item, index) => ({ ...item, index })).filter(item => filter === "全部" || item.type === filter);
-  const visible = filter === "全部" && !showAll ? filtered.slice(0, 4) : filtered;
-  useEffect(() => { if (!isOpen) return; const value = document.body.style.overflow; document.body.style.overflow = "hidden"; return () => { document.body.style.overflow = value; }; }, [isOpen]);
+  const filtered = photographs.map((item, index) => ({ ...item, index })).filter(item => filter === "全部" || item.type === filter);
+  const visible = filter === "全部" && !showAll ? filtered.slice(0, 3) : filtered;
+  const featured = photographs[interests[interest].photo];
+
+  useEffect(() => {
+    if (!photoOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previous; };
+  }, [photoOpen]);
+  useEffect(() => {
+    if (!menuOpen) return;
+    const close = (event: KeyboardEvent) => { if (event.key === "Escape") { setMenuOpen(false); menuButton.current?.focus(); } };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [menuOpen]);
   useEffect(() => () => { if (timer.current) clearTimeout(timer.current); }, []);
-  function openPhoto(index: number, button: HTMLButtonElement) { trigger.current = button; setSelected(index); modal.current?.showModal(); setIsOpen(true); }
-  function closePhoto() { modal.current?.close(); }
-  function shiftPhoto(direction: number) { const position = filtered.findIndex(item => item.index === selected); setSelected(filtered[(position + direction + filtered.length) % filtered.length].index); }
-  async function copyPhone() { try { await navigator.clipboard.writeText(phone); setCopied(true); setCopyError(false); } catch { setCopyError(true); } if (timer.current) clearTimeout(timer.current); timer.current = setTimeout(() => setCopied(false), 3000); }
-  const nav = [["首页", "home"], ["生活相册", "moments"], ["关于我", "about"], ["相处指南", "faq"]];
+
+  function openPhoto(index: number, button: HTMLButtonElement) { trigger.current = button; setPhoto(index); dialog.current?.showModal(); setPhotoOpen(true); }
+  function shiftPhoto(direction: number) { const index = filtered.findIndex(item => item.index === photo); setPhoto(filtered[(index + direction + filtered.length) % filtered.length].index); }
+  async function copyPhone() {
+    try { await navigator.clipboard.writeText(phone); setCopied(true); setCopyError(false); }
+    catch { setCopied(false); setCopyError(true); }
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => setCopied(false), 3000);
+  }
+
   return <>
-    <a className="skip-link" href="#main">跳到正文</a>
-    <div className="hero-shell" id="home">
-      <header className="header wrap">
-        <a className="logo" href="#home" aria-label="何丽江 首页">何丽江<Star/></a>
-        <nav id="main-navigation" className={menuOpen ? "nav open" : "nav"} aria-label="主导航">{nav.map(([label, id]) => <a href={`#${id}`} key={id} onClick={() => setMenuOpen(false)}>{label}</a>)}</nav>
-        <a className="header-contact" href="#contact">打个招呼 <ArrowUpRight size={17}/></a>
-        <button className="menu-toggle" aria-controls="main-navigation" aria-expanded={menuOpen} aria-label={menuOpen ? "关闭菜单" : "打开菜单"} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X/> : <Menu/>}</button>
+    <a href="#main" className="skip-link">跳到正文</a>
+    <section className="hero" id="home" aria-labelledby="hero-title">
+      <img className="hero-image" src={asset("/photos/image2.jpeg")} alt="何丽江在山野草地间，倚着木围栏" width="1080" height="1440" fetchPriority="high"/>
+      <div className="hero-shade"/>
+      <header className="header">
+        <a className="brand" href="#home" aria-label="何丽江首页"><Emblem/><span>何丽江<small>PERSONAL JOURNAL</small></span></a>
+        <nav className={menuOpen ? "navigation open" : "navigation"} id="navigation" aria-label="主导航">
+          {[["关于我", "about"], ["所爱之事", "interests"], ["生活片段", "journal"], ["联系我", "contact"]].map(([label, id], i) => <a href={`#${id}`} onClick={() => setMenuOpen(false)} key={id}>{label}{i === 1 && <sup>04</sup>}</a>)}
+        </nav>
+        <button ref={menuButton} className="menu-button" aria-expanded={menuOpen} aria-controls="navigation" aria-label={menuOpen ? "关闭菜单" : "打开菜单"} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={23}/> : <Menu size={23}/>}</button>
       </header>
-      <main id="main">
-        <section className="hero wrap" aria-labelledby="hero-heading">
-          <div className="hero-copy">
-            <div className="hero-doodles" aria-hidden="true"><Palette className="doodle-palette"/><Zap className="doodle-zap"/><span className="doodle-circle"/></div>
-            <p className="hero-greeting">Hello there! <span>你好呀 👋</span></p>
-            <h1 id="hero-heading">我是何丽江，<br/><span>好奇心收藏家。</span></h1>
-            <p className="hero-description">来自云南，现在在西安。<br/>一个慢热的 INFJ，喜欢旅行、户外，也喜欢宅着打游戏。<br/>认真收集日常的小快乐，偶尔放空，永远保持好奇。</p>
-            <div className="hero-actions"><a className="button pink" href="#moments">看看我的小世界 <ArrowUpRight size={19}/></a><a className="button cream" href="#about">认识我 <ArrowRight size={18}/></a></div>
-            <div className="hero-meta"><span><MapPin size={16}/> 西安 · 中国</span><span className="meta-separator"/><span>慢热，但对世界充满热情。</span></div>
-            <div className="bottom-doodles" aria-hidden="true"><Plus/><svg viewBox="0 0 100 50"><path d="M0 10q12-16 25 0t25 0t25 0t25 0M0 25q12-16 25 0t25 0t25 0t25 0M0 40q12-16 25 0t25 0t25 0t25 0"/></svg><span/></div>
-          </div>
-          <div className="portrait-stage"><div className="dot-patch" aria-hidden="true"/><figure className="portrait-card"><span className="portrait-stripes" aria-hidden="true"/><span className="portrait-orbit" aria-hidden="true"/><div className="portrait-photo"><img src={asset("/photos/image2.jpeg")} alt="何丽江 在山野草地间，倚着木围栏" fetchPriority="high" width="700" height="1000"/></div><span className="portrait-tag">THIS IS ME.</span><Star className="portrait-star"/><figcaption><span>一点安静，一点野。</span><Heart size={22}/></figcaption></figure><span className="portrait-sticker">保持好奇<br/><b>STAY CURIOUS!</b></span></div>
-          <a href="#moments" className="scroll-down"><ArrowDown size={17}/> 向下探索我的日常</a>
-        </section>
-        <section className="moments-section dotted" id="moments"><div className="wrap section">
-          <div className="section-heading"><p className="eyebrow">LIFE IS MY FAVORITE COLLECTION</p><h2>生活里的高光时刻<Star/></h2><p>不用特别盛大，喜欢的瞬间就值得被记住。</p></div>
-          <div className="filters" role="group" aria-label="筛选生活照片">{["全部", "在路上", "小日常"].map(type => <button key={type} className={filter === type ? "active" : ""} aria-pressed={filter === type} onClick={() => setFilter(type)}>{type}<span>{type === "全部" ? "05" : type === "在路上" ? "02" : "03"}</span></button>)}</div>
-          <div className="gallery-grid">{visible.map(item => <button key={item.image} className={`photo-card photo-${item.index}`} aria-label={`放大照片：${item.title}`} onClick={event => openPhoto(item.index, event.currentTarget)}><div className="photo-image"><img src={asset(`/photos/${item.image}`)} alt={item.title} loading="lazy" width="800" height="600"/><span className="photo-label">{item.label}</span><span className="photo-zoom"><ArrowUpRight/></span></div><div className="photo-caption"><div><h3>{item.title}</h3><span>{item.type} · 生活记录</span></div><span className="photo-index">0{item.index + 1}</span></div></button>)}</div>
-          {filter === "全部" && <div className="gallery-more"><button className="button black" onClick={() => setShowAll(!showAll)}>{showAll ? "收起部分照片" : "还有一个小快乐，继续看看"}{showAll ? <ChevronLeft size={18}/> : <ArrowRight size={18}/>}</button><span>{showAll ? "05 / 05" : "04 / 05"}</span></div>}
-        </div></section>
-        <section className="interest-section diagonal"><div className="wrap section"><div className="section-heading"><p className="eyebrow">THINGS THAT MAKE ME, ME</p><h2>我喜欢的那些事</h2><p>出走和停留，都有让人心动的理由。</p></div><div className="interest-grid">{interests.map(({ icon: Icon, name, english, text }) => <article className="interest-card" key={name}><div className="interest-icon"><Icon size={35} strokeWidth={1.7}/></div><h3>{name}</h3><p>{text}</p><span>{english}</span></article>)}</div></div></section>
-        <section className="about-section" id="about"><div className="wrap section"><div className="section-heading"><p className="eyebrow">MORE THAN A FEW LABELS</p><h2>标签之外，还有很多我<Plus/></h2></div><div className="about-grid"><figure className="about-photo"><img src={asset("/photos/image6.jpeg")} alt="何丽江 的看展日常" loading="lazy" width="600" height="800"/><figcaption><span>何丽江</span><Sparkles size={22}/></figcaption><span className="about-sticker">INFJ<br/>双鱼座 ♡</span></figure><div className="about-notes"><article className="about-note pink-note"><h3>慢热的外表，热闹的内心。</h3><p>我是何丽江。来自云南，现在在西安生活。表面波澜不惊，心里可能已经炸开了花。</p><p>比起一份标准的自我介绍，我更想让你从这些生活的小事里，认识真实的我。</p></article><article className="about-note"><h3>我的人生坐标</h3><dl className="journey"><div><dt>01 · 来处</dt><dd>彩云之南，云南</dd></div><div><dt>02 · 学习</dt><dd>西南科技大学 · 信息管理</dd></div><div><dt>03 · 此刻</dt><dd>在西安，继续好好生活</dd></div></dl></article><a className="text-link" href={source} target="_blank" rel="noreferrer">完整个人说明书 <ArrowUpRight size={19}/></a></div></div></div></section>
-        <section className="connection-section"><div className="wrap section"><div className="section-heading"><p className="eyebrow">GOOD CONNECTIONS START SMALL</p><h2>和我相处，可以很简单</h2></div><div className="connection-grid">{[{ icon: Heart, title: "1. 真诚地认识", text: "不必急着熟悉。给彼此一点时间，从一句自然的“你好”开始。", color: "rose" }, { icon: Gamepad2, title: "2. 一起做喜欢的事", text: "去旅行，玩户外，或者一起开局。在共同的快乐里，慢慢靠近。", color: "yellow" }, { icon: Sparkles, title: "3. 自在地做自己", text: "认真倾听，也尊重边界。不用刻意迎合，轻松一点就很好。", color: "blue" }].map(({ icon: Icon, title, text, color }) => <article className="connection-card" key={title}><div className={`connection-art ${color}`} aria-hidden="true"><span className="art-circle"/><Icon size={84} strokeWidth={1.3}/><Star/><span className="art-dots"/></div><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
-        <section className="faq-section diagonal" id="faq"><div className="wrap section faq-layout"><div><p className="eyebrow">A LITTLE USER MANUAL</p><h2>你可能<br/>想问的事<em>？</em></h2><p className="faq-intro">先聊几句，<br/>慢慢认识就好。</p><Star className="faq-star"/></div><div className="faq-list">{questions.map(([question, answer], index) => <details key={question} open={index === 0}><summary><span>{question}</span><Plus size={20}/></summary><p>{answer}</p></details>)}</div></div></section>
-        <section className="quote-section"><div className="wrap"><span>一句想留在这里的话</span><blockquote>“生活给了我多少积雪，<br/>我就能遇到多少个<span>春天。</span>”</blockquote><p>—— 写在我的个人说明书里</p></div></section>
-        <section className="contact-section dotted" id="contact"><div className="wrap section"><div className="contact-box"><div className="contact-title"><p className="eyebrow">LET’S MAKE A LITTLE CONNECTION</p><h2>下一段故事，<br/>从一句<span>你好</span>开始。</h2><p>聊旅行、聊游戏，也聊日常里那些有趣的小事。</p><Star className="contact-star"/></div><div className="contact-details"><span className="phone-label">给 何丽江 打个电话</span><a className="phone-number" href={`tel:${phone}`}>195 2688 0781</a><div className="contact-actions"><a className="button black" href={`tel:${phone}`}><Phone size={17}/> 点击拨号</a><button className="button cream" onClick={copyPhone}>{copied ? <Check size={17}/> : <Copy size={17}/>}<span aria-live="polite">{copied ? "号码已复制" : "复制号码"}</span></button></div>{copyError && <p className="copy-error" role="status">请选中号码手动复制：19526880781</p>}<a className="contact-source" href={source} target="_blank" rel="noreferrer">继续读我的个人说明书 <ArrowUpRight size={16}/></a></div></div></div></section>
-      </main>
-    </div>
-    <footer className="footer"><div className="wrap"><a className="logo" href="#home" aria-label="回到首页">何丽江<Star/></a><span>© {new Date().getFullYear()} 何丽江 · 认真生活，保持好奇。</span><a href="#home">回到顶部 <ArrowUpRight size={16}/></a></div></footer>
-    <dialog ref={modal} className="lightbox" aria-label="生活相册" onClose={() => { setIsOpen(false); trigger.current?.focus(); }} onClick={event => { if (event.currentTarget === event.target) closePhoto(); }} onKeyDown={event => { if (event.key === "ArrowRight") { event.preventDefault(); shiftPhoto(1); } if (event.key === "ArrowLeft") { event.preventDefault(); shiftPhoto(-1); } }}><div className="lightbox-inner"><button className="lightbox-close" aria-label="关闭照片" onClick={closePhoto}><X/></button><img src={asset(`/photos/${moments[selected].image}`)} alt={moments[selected].title}/><div className="lightbox-caption"><div><h3>{moments[selected].title}</h3><p>{moments[selected].caption}</p></div><span>{filtered.findIndex(item => item.index === selected) + 1} / {filtered.length}</span></div><div className="lightbox-navigation"><button onClick={() => shiftPhoto(-1)} aria-label="上一张照片"><ChevronLeft size={19}/> 上一张</button><span>← → 切换 · ESC 关闭</span><button onClick={() => shiftPhoto(1)} aria-label="下一张照片">下一张 <ChevronRight size={19}/></button></div></div></dialog>
+      <div className="hero-name"><p>IN MY OWN TIME, IN MY OWN WAY.</p><h1 id="hero-title">何丽江</h1><span>HE LIJIANG</span></div>
+      <div className="hero-bottom"><span className="hero-coordinate">FROM YUNNAN<br/>BASED IN XI’AN</span><div className="hero-intro"><p>慢一点，去感受生活。</p><a className="pill light" href="#about">走进我的小世界 <ArrowUpRight size={15}/></a></div><a className="scroll-link" href="#about">向下探索 <ArrowDown size={15}/></a></div>
+    </section>
+    <main id="main">
+      <div className="ribbon" aria-hidden="true"><div>{[0, 1].map(i => <span key={i}>走进山野 <i>✳</i> 感受日常 <i>✳</i> 保持好奇 <i>✳</i> 认真生活 <i>✳</i> 慢慢认识 <i>✳</i> 自在一点 <i>✳</i> </span>)}</div></div>
+      <section className="about section wrap" id="about">
+        <div className="section-kicker"><span>01 / ABOUT ME</span><span>比标签多一点</span></div>
+        <div className="about-intro"><h2>安静的外表，<br/><em>热闹的内心。</em></h2><div className="about-copy"><p>我是何丽江，来自云南，现在在西安生活。<br/>一个慢热的 INFJ，双鱼座。<br/>表面波澜不惊，心里可能已经炸开了花。</p><p>喜欢走进山野，也享受安静的日常。<br/>比起一份标准的自我介绍，我更想让你从这些<br className="desktop-break"/>喜欢的小事里，认识真实的我。</p><a className="underlined-link" href={source} target="_blank" rel="noreferrer">阅读完整个人说明书 <ArrowUpRight size={16}/></a></div></div>
+        <div className="about-images"><figure className="about-wide"><img src={asset("/photos/image9.jpeg")} alt="在山间道路上，和牛群不期而遇" loading="lazy" width="1220" height="1080"/><figcaption>在路上，总有新的相遇。<span>OUTSIDE & ALIVE</span></figcaption></figure><figure className="about-tall"><img src={asset("/photos/image6.jpeg")} alt="何丽江在展览中欣赏画作" loading="lazy" width="956" height="1274"/><figcaption>停下来，也是一种发现。<span>LOOK A LITTLE CLOSER</span></figcaption></figure><div className="image-note"><Emblem/><span>一点安静。<br/>一点野。</span></div></div>
+        <div className="personal-coordinates"><div><span>来处 / ORIGIN</span><p>云南</p></div><div><span>学习 / EDUCATION</span><p>西南科技大学 · 信息管理</p></div><div><span>此刻 / CURRENTLY</span><p>在西安，好好生活</p></div></div>
+      </section>
+      <section className="interests dark-section" id="interests"><div className="wrap section">
+        <div className="section-kicker"><span>02 / THINGS I LOVE</span><span>生活，有很多种打开方式</span></div>
+        <div className="interests-heading"><h2>让日子，<br/><em>有一点喜欢。</em></h2><p>在出走与停留之间，<br/>找到让自己舒服的节奏。</p></div>
+        <div className="interests-grid"><div className="interest-list">{interests.map((item, index) => <div className={interest === index ? "interest-item active" : "interest-item"} key={item.title}><button aria-expanded={interest === index} aria-controls={`interest-detail-${index}`} onClick={() => setInterest(index)}><span className="interest-number">0{index + 1}</span><span className="interest-title">{item.title}<small>{item.english}</small></span><span className="interest-toggle">{interest === index ? <Minus size={19}/> : <Plus size={19}/>}</span></button><div className="interest-description" id={`interest-detail-${index}`} hidden={interest !== index}><p>{item.text}</p><div>{item.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div></div>)}</div><figure className="interest-photo"><img key={featured.image} src={asset(`/photos/${featured.image}`)} alt={featured.caption} loading="lazy" width="1080" height="1440"/><figcaption><span>{interests[interest].english}</span><span>0{interest + 1} / 04</span></figcaption></figure></div>
+      </div></section>
+      <section className="quote-section" aria-label="写给自己的话"><img src={asset("/photos/image3.jpeg")} alt="山顶暮色与晚霞" loading="lazy" width="1080" height="1440"/><div className="quote-shade"/><div className="quote-content"><Emblem/><span className="eyebrow">A NOTE TO MYSELF</span><blockquote>生活给了我多少积雪，<br/>我就能遇到多少个<span>春天。</span></blockquote><p>— 写在我的个人说明书里</p></div></section>
+      <section className="journal section wrap" id="journal"><div className="section-kicker"><span>03 / MOMENTS OF LIFE</span><span>把喜欢的瞬间留下</span></div><div className="journal-heading"><h2>日常，<em>也值得收藏。</em></h2><p>不必盛大。喜欢的，就是好风景。</p></div><div className="journal-toolbar"><span>生活片段 / PERSONAL MOMENTS</span><div className="journal-filters" role="group" aria-label="筛选生活照片">{["全部", "在路上", "小日常"].map(type => <button className={filter === type ? "active" : ""} aria-pressed={filter === type} key={type} onClick={() => { setFilter(type); setShowAll(false); }}>{type}</button>)}</div></div>
+        <div className="journal-grid">{visible.map(item => <button key={item.image} className="journal-card" onClick={event => openPhoto(item.index, event.currentTarget)} aria-label={`放大照片：${item.title}`}><div className={`journal-photo journal-photo-${item.index}`}><img src={asset(`/photos/${item.image}`)} alt={item.caption} loading="lazy" width="1080" height="1440"/><span className="photo-arrow"><ArrowUpRight size={20}/></span></div><div className="journal-meta"><span>{item.type}</span><span>0{item.index + 1}</span></div><h3>{item.title}</h3><span className="journal-english">{item.english}</span></button>)}</div>
+        {filter === "全部" && <div className="journal-more"><button className="pill" onClick={() => setShowAll(!showAll)}>{showAll ? "收起生活片段" : "翻开更多日常"}{showAll ? <Minus size={15}/> : <Plus size={15}/>}</button><span>{showAll ? "06" : "03"} / 06 MOMENTS</span></div>}
+      </section>
+      <section className="faq-section"><div className="wrap section faq-grid"><div className="faq-intro"><span className="eyebrow">04 / A LITTLE USER MANUAL</span><h2>慢慢来，<br/><em>慢慢认识。</em></h2><p>一些关于我的小小答案，<br/>也许就是我们聊天的开始。</p><Emblem/></div><div className="faq-list">{faqs.map(([question, answer], index) => <details key={question} open={index === 0}><summary><span className="faq-number">0{index + 1}</span><span>{question}</span><Plus size={17}/></summary><p>{answer}</p></details>)}</div></div></section>
+      <section className="contact-section dark-section" id="contact"><div className="wrap section"><div className="section-kicker"><span>05 / SAY HELLO</span><span>故事，从一句你好开始</span></div><div className="contact-main"><div><p className="eyebrow">WHENEVER YOU FEEL LIKE IT.</p><h2>很高兴，<br/><em>在这里遇见你。</em></h2><p className="contact-description">聊旅行、聊游戏，<br/>也聊生活里那些有趣的小事。</p></div><div className="contact-details"><span>给何丽江打个电话</span><a className="phone" href={`tel:${phone}`}>195 2688 0781<ArrowUpRight/></a><div className="contact-actions"><a className="pill filled" href={`tel:${phone}`}>打个招呼 <ArrowUpRight size={16}/></a><button className="copy-button" onClick={copyPhone}>{copied ? <Check size={15}/> : <Copy size={15}/>}<span aria-live="polite">{copied ? "号码已复制" : "复制号码"}</span></button></div>{copyError && <p className="copy-error" role="status">请选中号码手动复制：19526880781</p>}<a className="source-link" href={source} target="_blank" rel="noreferrer">我的飞书个人说明书 <ArrowUpRight size={14}/></a></div></div></div></section>
+    </main>
+    <footer className="footer dark-section"><div className="wrap"><div className="footer-top"><a className="brand" href="#home" aria-label="返回何丽江首页"><Emblem/><span>何丽江<small>IN MY OWN TIME.</small></span></a><p>认真生活，保持好奇。<br/>也记得，给自己一点慢下来的时间。</p><a href="#home" className="back-top">回到顶部 <ArrowUpRight size={15}/></a></div><div className="footer-wordmark" aria-hidden="true">HE LIJIANG</div><div className="footer-bottom"><span>© {new Date().getFullYear()} 何丽江</span><span>云南出发 · 西安生活</span><span>MADE OF LITTLE MOMENTS.</span></div></div></footer>
+    <dialog className="lightbox" ref={dialog} aria-label="生活相册" onClose={() => { setPhotoOpen(false); trigger.current?.focus(); }} onClick={event => { if (event.target === event.currentTarget) dialog.current?.close(); }} onKeyDown={event => { if (event.key === "ArrowRight") { event.preventDefault(); shiftPhoto(1); } if (event.key === "ArrowLeft") { event.preventDefault(); shiftPhoto(-1); } }}><div className="lightbox-inner"><button className="lightbox-close" aria-label="关闭照片" onClick={() => dialog.current?.close()}><X size={23}/></button><img src={asset(`/photos/${photographs[photo].image}`)} alt={photographs[photo].caption}/><div className="lightbox-caption"><div><span>{photographs[photo].english}</span><h3>{photographs[photo].title}</h3><p>{photographs[photo].caption}</p></div><span>{filtered.findIndex(item => item.index === photo) + 1} / {filtered.length}</span></div><div className="lightbox-navigation"><button onClick={() => shiftPhoto(-1)} aria-label="上一张照片"><ArrowLeft size={17}/> 上一张</button><span>← → 切换 · ESC 关闭</span><button onClick={() => shiftPhoto(1)} aria-label="下一张照片">下一张 <ArrowRight size={17}/></button></div></div></dialog>
   </>;
 }
