@@ -1,8 +1,9 @@
 # 何丽江 · 慢慢生活，保持好奇
 
-何丽江的独立个人网站。参考 Calmco 示例图的全屏照片、大幅姓名、深棕与奶油色、细线条和留白，用原创页面代码呈现个人介绍、兴趣、生活相册、相处指南和联系方式。
+何丽江的独立个人网站。参考 Calmco 示例图的全屏照片、大幅姓名、深棕与奶油色、细线条和留白，用原创页面代码呈现技能首页与独立的个人生活页。
 
-- 网站：https://rikahe0303-bot.github.io/rika-personal-site/
+- 技能首页：https://rikahe0303-bot.github.io/rika-personal-site/
+- 关于我：https://rikahe0303-bot.github.io/rika-personal-site/about/
 - 源码：https://github.com/rikahe0303-bot/rika-personal-site
 - 视觉参考：https://www.framer.com/marketplace/templates/calmco/
 - 个人说明书：https://my.feishu.cn/wiki/PwFMwXy47i7csPkxGR7cD1k86Pf
@@ -31,7 +32,9 @@ npm run build:pages
 
 ## 主要文件
 
-- `app/page.tsx`：页面内容、导航、兴趣切换、相册和电话交互。
+- `app/page.tsx`：技能首页入口与页面元数据。
+- `app/about/page.tsx`：个人生活页入口与页面元数据。
+- `app/components/personal-site.tsx`：两页共用导航、页面内容、相册和电话交互。
 - `app/globals.css`：响应式布局、配色、字体和减少动态效果设置。
 - `app/layout.tsx`：网页标题、简介和图标。
 - `public/photos/`：九张本地生活照片。
@@ -39,7 +42,11 @@ npm run build:pages
 - `scripts/build-pages.mjs`：GitHub Pages 构建脚本。
 - `.github/workflows/pages.yml`：自动发布流程。
 
-## 交互
+## 页面与交互
+
+- 首页首屏突出 IP 操盘手与情感陪伴师，正文展示两项技能及联系入口。
+- 关于我页单独展示性格、兴趣、九张照片与相处指南；支持直接打开与刷新。
+- 两页通过导航互相访问，静态链接包含 GitHub Pages 仓库前缀。
 
 - 手机导航可展开与收起，Escape 关闭。
 - 四组兴趣切换文字与照片。
