@@ -12,30 +12,29 @@ const socialLinks = [
 ];
 const photographs = [
   { image: "image3.jpeg", title: "把日落，留在心里。", english: "THE LAST LIGHT", type: "在路上", caption: "山顶的风，和刚刚好的晚霞。" },
-  { image: "image6.jpeg", title: "在别人的色彩里，停留。", english: "A QUIET AFTERNOON", type: "小日常", caption: "假装文艺青年去看展，给好奇心留一点空间。" },
-  { image: "image10.jpeg", title: "小小的事，也值得投入。", english: "MADE OF LITTLE JOYS", type: "小日常", caption: "紧跟潮流，拼豆！一颗一颗拼起来的，是简单而具体的快乐。" },
-  { image: "image11.jpeg", title: "和胖虎，一起慢慢走。", english: "MY LITTLE COMPANION", type: "小日常", caption: "这是胖虎，我的干儿子，也是日常里可爱的陪伴。" },
+  { image: "image6.jpeg", title: "在别人的色彩里，停留。", english: "A QUIET AFTERNOON", type: "小日常", caption: "去看展，给好奇心留一点空间。" },
+  { image: "image10.jpeg", title: "小小的事，也值得投入。", english: "MADE OF LITTLE JOYS", type: "小日常", caption: "紧跟潮流，拼豆！" },
+  { image: "image11.jpeg", title: "和胖虎，一起慢慢走。", english: "MY LITTLE COMPANION", type: "小日常", caption: "这是胖虎，我的干儿子。" },
   { image: "image9.jpeg", title: "出发，就有新的相遇。", english: "SOMEWHERE OUTSIDE", type: "在路上", caption: "走进山野，总会碰见计划之外的可爱。" },
   { image: "image2.jpeg", title: "把自己，还给山野。", english: "A LITTLE CLOSER TO NATURE", type: "在路上", caption: "吹吹风，走走路。在大自然里，找回自己的节奏。" },
-  { image: "friends.jpeg", title: "碰个杯，认识新朋友。", english: "GOOD COMPANY", type: "小日常", caption: "出去玩，见到不同的人，也多一些可以聊的故事。" },
+  { image: "friends.jpeg", title: "碰个杯，认识新朋友。", english: "GOOD COMPANY", type: "小日常", caption: "出去玩，认识新朋友。" },
   { image: "food.jpeg", title: "认真研究，怎么填饱肚子。", english: "A TABLE OF HAPPINESS", type: "小日常", caption: "吃点喜欢的，把普通的一餐过得有滋有味。" },
   { image: "mahjong.jpeg", title: "和朋友，一起学点国粹。", english: "AROUND THE TABLE", type: "小日常", caption: "凑一桌，摸摸牌。我的日常，也有这样热闹的一面。" },
 ];
 const interests = [
-  { title: "走进山野", english: "WANDER", text: "爱旅游，去过很多城市，也爱玩户外。和大自然亲密接触，在路上认识不同的人，见到计划之外的风景。", tags: ["旅行", "户外", "自然"], photo: 4 },
-  { title: "留一点艺术", english: "NOTICE", text: "假装文艺青年去看展，是我的日常之一。在一幅画前停一停，看看别人的色彩，也给自己留一点慢下来的时间。", tags: ["看展", "色彩", "好奇心"], photo: 1 },
-  { title: "享受小日常", english: "SLOW DOWN", text: "各类游戏都想尝尝鲜，也喜欢跟着潮流拼豆。和朋友学点国粹，再研究怎么填饱肚子，日常就这样有滋有味。", tags: ["游戏", "拼豆", "麻将", "美食"], photo: 2 },
-  { title: "与可爱作伴", english: "CONNECT", text: "遛遛狗，和胖虎一起慢慢走。哦，他叫胖虎，是我的干儿子！和大自然亲密接触，也和这些可爱的小日常待在一起。", tags: ["胖虎", "陪伴", "倾听"], photo: 3 },
+  { title: "走进山野", english: "WANDER", text: "爱旅行，也爱户外。去过很多城市，喜欢和大自然亲密接触。", tags: ["旅行", "户外", "自然"], photo: 4 },
+  { title: "留一点艺术", english: "NOTICE", text: "假装文艺青年去看展，在喜欢的画前停一停。", tags: ["看展", "色彩", "好奇心"], photo: 1 },
+  { title: "享受小日常", english: "SLOW DOWN", text: "游戏、拼豆、麻将、美食。各类新鲜事，都想试一试。", tags: ["游戏", "拼豆", "麻将", "美食"], photo: 2 },
+  { title: "与可爱作伴", english: "CONNECT", text: "和胖虎一起散步。他是我的干儿子，也是日常的小快乐。", tags: ["胖虎", "陪伴", "倾听"], photo: 3 },
 ];
 const faqs = [
-  ["可以怎么称呼你？", "我是何丽江，也可以叫我水水。一个慢热的 INFJ，浪漫的双鱼座。表面波澜不惊，心里可能已经炸开了花。"],
-  ["从哪里来，现在在哪里？", "我来自云南，现在在西安生活。毕业于西南科技大学，主修信息管理。"],
-  ["和你相处，有什么小提示？", "我是一个非常温和的人，但边界感很强，主打尊重他人命运。慢热、不主动、不拒绝，但非常负责。心里可能已经炸开了花，表面还是波澜不惊。更多的，就留给你慢慢体会。"],
-  ["怎么介绍自己的经历？", "毕业于西南科技大学，主修信息管理。我在个人说明书里写下的身份是 IP 操盘手、情感陪伴师，也坦诚地把自己叫作职场小白：毕业后还没有上过班。不过，出去玩见到的人多，人情世故也在这些相遇里慢慢学。"],
-  ["怎样才能和你慢慢熟悉？", "一起做喜欢的事就很好：旅行、户外、看展，或者一起试试新游戏。给彼此一点时间，自然一点，真诚一点。"],
-  ["可以找你聊些什么？", "旅行、游戏、拼豆、美食，或者日常的小事都可以。我愿意做一个知心好朋友，听你说心事、陪你梳理情绪。我的想法通常只说一遍，也尊重你的选择。胖虎是我常遛的狗狗，也是我的干儿子。"],
-  ["怎么看待低落和重新出发？", "我是浪漫的双鱼座，也是 INFJ。我在个人说明书里打趣自己是‘放弃型人格’：‘我时常万念俱灰，又经常死灰复燃！生活给了我多少积雪，我就能遇到多少个春天。’"],
-  ["怎么联系你？", "电话是 19526880781。你可以在页面下方直接拨号或复制号码，也可以去抖音和小红书，看看我存放情绪的小角落。"],
+  ["怎么称呼你？", "何丽江，也可以叫我水水。"],
+  ["你的个人背景？", "26 岁，云南人，现居西安。西南科技大学 · 信息管理。"],
+  ["和你相处的小提示？", "慢热、温和、有边界。认真负责，也尊重彼此的选择。"],
+  ["你的经历？", "毕业后还没有正式上班的经历，旅行让我认识了很多不同的人。"],
+  ["平时喜欢什么？", "旅行、户外、游戏、看展。也喜欢拼豆、美食、麻将和遛胖虎。"],
+  ["可以找你聊什么？", "聊 IP、聊日常，也听你说心事，做一个知心朋友。"],
+  ["怎么联系你？", "19526880781。也可以在下方找到我的抖音和小红书。"],
 ];
 
 function Emblem({ className = "" }: { className?: string }) {
@@ -114,17 +113,17 @@ export default function PersonalSite({ page }: { page: "skills" | "about" }) {
           <div className="skills-layout">
             <div className="skills-intro"><span className="editorial-label">WHAT I DO</span><h2 id="skills-title">认真表达<br/><em>用心陪伴</em></h2><p>我是何丽江，也可以叫我水水。<br/>温和，有边界，认真对待每一次交流。</p></div>
             <div className="skill-list">
-              <article className="skill-row"><span className="skill-number">01</span><div><span className="eyebrow">PERSONAL IP</span><h3>IP 操盘手</h3><p>欢迎和我聊聊 IP 相关的想法。你也可以从我的抖音、小红书出发，认识我的表达与日常。</p><a className="underlined-link" href="#social">看看我的内容 <ArrowUpRight size={16}/></a></div></article>
-              <article className="skill-row"><span className="skill-number">02</span><div><span className="eyebrow">EMOTIONAL COMPANIONSHIP</span><h3>情感陪伴师</h3><p>做一个知心好朋友，听你说心事，陪你梳理情绪。温和，也有边界；我的想法通常只说一遍，尊重你的选择。</p><a className="underlined-link" href="#contact">找我聊聊 <ArrowUpRight size={16}/></a></div></article>
+              <article className="skill-row"><span className="skill-number">01</span><div><span className="eyebrow">PERSONAL IP</span><h3>IP 操盘手</h3><p>聊聊 IP，也通过抖音和小红书认识我的表达。</p><a className="underlined-link" href="#social">看看我的内容 <ArrowUpRight size={16}/></a></div></article>
+              <article className="skill-row"><span className="skill-number">02</span><div><span className="eyebrow">EMOTIONAL COMPANIONSHIP</span><h3>情感陪伴师</h3><p>认真倾听，陪你梳理情绪。温和有边界，尊重你的选择。</p><a className="underlined-link" href="#contact">找我聊聊 <ArrowUpRight size={16}/></a></div></article>
             </div>
           </div>
         </section>
-        <section className="personal-preview"><div className="wrap section personal-preview-layout"><figure><img src={asset("/photos/image6.jpeg")} alt="何丽江在展览中欣赏画作" width="956" height="1274" loading="lazy"/></figure><div><span className="eyebrow">02 / THE PERSONAL SIDE</span><h2>走进山野<br/><em>也走进生活</em></h2><p>26 岁，来自云南，现在在西安生活。<br/>毕业于西南科技大学，主修信息管理。<br/>慢热的 INFJ，浪漫的双鱼座。<br/>爱旅行、户外和各种游戏，<br/>也爱看展、拼豆，和胖虎一起散步。</p><a className="pill" href={asset("/about/")}>翻开「关于我」 <ArrowUpRight size={16}/></a></div></div></section>
+        <section className="personal-preview"><div className="wrap section personal-preview-layout"><figure><img src={asset("/photos/image6.jpeg")} alt="何丽江在展览中欣赏画作" width="956" height="1274" loading="lazy"/></figure><div><span className="eyebrow">02 / THE PERSONAL SIDE</span><h2>走进山野<br/><em>也走进生活</em></h2><p>云南出发，在西安生活。<br/>慢热的 INFJ，浪漫的双鱼座。<br/>喜欢旅行、户外，也收藏日常的小快乐。</p><a className="pill" href={asset("/about/")}>翻开「关于我」 <ArrowUpRight size={16}/></a></div></div></section>
       </> : <>
       <div className="ribbon" aria-hidden="true"><div>{[0, 1].map(i => <span key={i}>走进山野 <i>✳</i> 感受日常 <i>✳</i> 保持好奇 <i>✳</i> 认真生活 <i>✳</i> 慢慢认识 <i>✳</i> 自在一点 <i>✳</i> </span>)}</div></div>
       <section className="about section wrap" id="about">
         <div className="section-kicker"><span>01 / ABOUT ME</span><span>比标签多一点</span></div>
-        <div className="about-intro"><h2>安静的外表，<br/><em>热闹的内心。</em></h2><div className="about-copy"><p className="nickname">Hi，我是何丽江。<br/>也可以叫我，<strong>水水。</strong></p><p>26 岁，来自彩云之南，现在在西安生活。<br/>毕业于西南科技大学，主修信息管理。<br/>一个慢热的 INFJ，浪漫的双鱼座。</p><p>我是一个非常温和的人，但边界感很强。<br/>慢热、不主动、不拒绝，却非常负责。<br/>心里炸开了花，表面也可以波澜不惊。</p><p>毕业后还没有上过班，是个职场小白。<br/>不过，出去玩见到的人多，<br/>也在不同的相遇里学着理解人情世故。</p><p>喜欢旅游，去过很多城市，也爱玩户外。<br/>各类游戏都想尝尝鲜。<br/>来看看这些日常，慢慢认识真实的我。</p><a className="underlined-link" href="#manual">翻开我的相处指南 <ArrowDown size={16}/></a></div></div>
+        <div className="about-intro"><h2>安静的外表，<br/><em>热闹的内心。</em></h2><div className="about-copy"><p className="nickname">Hi，我是何丽江。<br/>也可以叫我，<strong>水水。</strong></p><p>26 岁，来自云南，现居西安。<br/>INFJ · 双鱼座。</p><p><strong>温和有边界，慢热却负责。</strong><br/>爱旅行、爱户外，各类游戏都想尝鲜。</p><a className="underlined-link" href="#manual">翻开我的相处指南 <ArrowDown size={16}/></a></div></div>
         <div className="about-images"><figure className="about-wide"><img src={asset("/photos/image9.jpeg")} alt="在山间道路上，和牛群不期而遇" loading="lazy" width="1220" height="1080"/><figcaption>在路上，总有新的相遇。<span>OUTSIDE & ALIVE</span></figcaption></figure><figure className="about-tall"><img src={asset("/photos/image6.jpeg")} alt="何丽江在展览中欣赏画作" loading="lazy" width="956" height="1274"/><figcaption>停下来，也是一种发现。<span>LOOK A LITTLE CLOSER</span></figcaption></figure><div className="image-note"><Emblem/><span>一点安静。<br/>一点野。</span></div></div>
         <div className="personal-coordinates"><div><span>来处 / ORIGIN</span><p>云南</p></div><div><span>学习 / EDUCATION</span><p>西南科技大学 · 信息管理</p></div><div><span>此刻 / CURRENTLY</span><p>在西安，好好生活</p></div></div>
       </section>
@@ -138,7 +137,7 @@ export default function PersonalSite({ page }: { page: "skills" | "about" }) {
         <div className="journal-grid">{visible.map(item => <button key={item.image} className="journal-card" onClick={event => openPhoto(item.index, event.currentTarget)} aria-label={`放大照片：${item.title}`}><div className={`journal-photo journal-photo-${item.index}`}><img src={asset(`/photos/${item.image}`)} alt={item.caption} loading="lazy" width="1080" height="1440"/><span className="photo-arrow"><ArrowUpRight size={20}/></span></div><div className="journal-meta"><span>{item.type}</span><span>0{item.index + 1}</span></div><h3>{item.title}</h3><span className="journal-english">{item.english}</span></button>)}</div>
         {filter === "全部" && <div className="journal-more"><button className="pill" onClick={() => setShowAll(!showAll)}>{showAll ? "收起生活片段" : "翻开更多日常"}{showAll ? <Minus size={15}/> : <Plus size={15}/>}</button><span>{String(visible.length).padStart(2, "0")} / {String(photographs.length).padStart(2, "0")} MOMENTS</span></div>}
       </section>
-      <section className="faq-section" id="manual"><div className="wrap section faq-grid"><div className="faq-intro"><span className="eyebrow">04 / A LITTLE USER MANUAL</span><h2>慢慢来，<br/><em>慢慢认识。</em></h2><p>这是我的个人说明书，<br/>快速了解和我相处的方法。<br/>还有些说不完的，留给日常慢慢体会。</p><Emblem/></div><div className="faq-list">{faqs.map(([question, answer], index) => <details key={question} open={index === 0}><summary><span className="faq-number">0{index + 1}</span><span>{question}</span><Plus size={17}/></summary><p>{answer}</p></details>)}</div></div></section>
+      <section className="faq-section" id="manual"><div className="wrap section faq-grid"><div className="faq-intro"><span className="eyebrow">04 / A LITTLE USER MANUAL</span><h2>慢慢来，<br/><em>慢慢认识。</em></h2><p>几句简单的介绍，<br/>慢慢认识真实的我。</p><Emblem/></div><div className="faq-list">{faqs.map(([question, answer], index) => <details key={question} open={index === 0}><summary><span className="faq-number">0{index + 1}</span><span>{question}</span><Plus size={17}/></summary><p>{answer}</p></details>)}</div></div></section>
       </>}
       <section className="social-section section wrap" id="social" aria-labelledby="social-title">
         <div className="section-kicker"><span>{isHome ? "03" : "05"} / MY LITTLE CORNERS</span><span>还有一些话，想慢慢说</span></div>
