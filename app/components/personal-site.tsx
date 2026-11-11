@@ -84,10 +84,10 @@ export default function PersonalSite({ page }: { page: "skills" | "about" }) {
 
   return <>
     <a href="#main" className="skip-link">跳到正文</a>
-    <section className={isHome ? "hero skills-hero" : "personal-top"} id="home" aria-labelledby="hero-title">
-      {isHome && <><img className="hero-image" src={asset("/photos/image2.jpeg")} alt="何丽江在山野草地间，倚着木围栏" width="1080" height="1440" fetchPriority="high"/><div className="hero-shade"/></>}
+    <section className={isHome ? "cover-hero" : "personal-top"} id="home" aria-labelledby="hero-title">
+      {isHome && <><img className="cover-image" src={asset("/photos/image2.jpeg")} alt="何丽江在山野草地间，倚着木围栏" width="1080" height="1440" fetchPriority="high"/><div className="cover-shade"/></>}
       <header className="header">
-        <a className="brand" href={asset("/")} aria-label="何丽江首页"><Emblem/><span>何丽江<small>HE LIJIANG / SHUISHUI</small></span></a>
+        <a className="brand cover-brand" href={asset("/")} aria-label="何丽江首页"><span>何丽江<small>HE LIJIANG</small></span></a>
         <nav className={menuOpen ? "navigation open" : "navigation"} id="navigation" aria-label="主导航">
           <a href={asset("/")} aria-current={isHome ? "page" : undefined} onClick={() => setMenuOpen(false)}>首页 · 技能</a>
           <a href={asset("/about/")} aria-current={!isHome ? "page" : undefined} onClick={() => setMenuOpen(false)}>关于我</a>
@@ -98,23 +98,27 @@ export default function PersonalSite({ page }: { page: "skills" | "about" }) {
         <button ref={menuButton} className="menu-button" aria-expanded={menuOpen} aria-controls="navigation" aria-label={menuOpen ? "关闭菜单" : "打开菜单"} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={23}/> : <Menu size={23}/>}</button>
       </header>
       {isHome ? <>
-        <div className="hero-name"><p>EXPRESSION & CONNECTION</p><h1 id="hero-title">何丽江</h1><span>HE LIJIANG / 水水</span><div className="hero-skills"><a href="#skills">IP 操盘手</a><i aria-hidden="true"/><a href="#skills">情感陪伴师</a></div></div>
-        <div className="hero-bottom"><span className="hero-coordinate">FROM YUNNAN<br/>BASED IN XI’AN</span><div className="hero-intro"><p>认真表达，也认真倾听。</p><a className="pill light" href="#skills">了解我的技能 <ArrowDown size={15}/></a></div><a className="scroll-link" href={asset("/about/")}>认识生活中的我 <ArrowUpRight size={15}/></a></div>
-      </> : <div className="personal-page-heading wrap"><a href={asset("/")} className="underlined-link"><ArrowLeft size={15}/> 返回技能首页</a><div><h1 id="hero-title">关于水水。</h1><p>性格、所爱，还有那些值得留下的日常。</p></div></div>}
+        <div className="cover-content">
+          <span className="cover-eyebrow">PERSONAL SPACE / 01</span>
+          <div className="cover-card"><span className="cover-greeting">你好 我是</span><h1 id="hero-title">何丽江</h1><div className="cover-roles"><a href="#skills">IP 操盘手</a><span aria-hidden="true">/</span><a href="#skills">情感陪伴师</a></div><p>认真表达 也认真倾听<br/>温和有边界 自在做自己</p></div>
+          <div className="cover-actions"><a className="cover-button" href="#skills">了解我的技能 <ArrowUpRight size={16}/></a><a className="cover-button outline" href={asset("/about/")}>关于我 <ArrowUpRight size={16}/></a></div>
+        </div>
+        <div className="cover-bottom"><a className="cover-story" href={asset("/about/#journal")}><img src={asset("/photos/image6.jpeg")} alt="何丽江看展的生活片段" width="956" height="1274"/><span><small>A LITTLE OF MY LIFE</small><strong>在日常里<br/>慢慢认识我</strong></span><ArrowUpRight size={17}/></a><div className="cover-location"><span>云南出发 · 西安生活</span><a href="#skills" aria-label="向下浏览技能介绍"><ArrowDown size={18}/></a></div></div>
+      </> : <div className="personal-page-heading wrap"><a href={asset("/")} className="underlined-link"><ArrowLeft size={15}/> 返回技能首页</a><div><h1 id="hero-title">关于何丽江</h1><p>也可以叫我水水<br/>性格 所爱 还有值得留下的日常</p></div></div>}
     </section>
     <main id="main">
       {isHome ? <>
         <section className="skills-section section wrap" id="skills" aria-labelledby="skills-title">
           <div className="section-kicker"><span>01 / MY SKILLS</span><span>表达与陪伴</span></div>
           <div className="skills-layout">
-            <div className="skills-intro"><h2 id="skills-title">我的<em>技能。</em></h2><p>我是何丽江，也可以叫我水水。<br/>温和，有边界，认真对待每一次交流。</p><Emblem/></div>
+            <div className="skills-intro"><span className="editorial-label">WHAT I DO</span><h2 id="skills-title">认真表达<br/><em>用心陪伴</em></h2><p>我是何丽江，也可以叫我水水。<br/>温和，有边界，认真对待每一次交流。</p></div>
             <div className="skill-list">
               <article className="skill-row"><span className="skill-number">01</span><div><span className="eyebrow">PERSONAL IP</span><h3>IP 操盘手</h3><p>欢迎和我聊聊 IP 相关的想法。你也可以从我的抖音、小红书出发，认识我的表达与日常。</p><a className="underlined-link" href="#social">看看我的内容 <ArrowUpRight size={16}/></a></div></article>
               <article className="skill-row"><span className="skill-number">02</span><div><span className="eyebrow">EMOTIONAL COMPANIONSHIP</span><h3>情感陪伴师</h3><p>做一个认真倾听的知心朋友。愿意听你说说心事，也尊重你的选择和边界，让交流自然、舒服。</p><a className="underlined-link" href="#contact">找我聊聊 <ArrowUpRight size={16}/></a></div></article>
             </div>
           </div>
         </section>
-        <section className="personal-preview"><div className="wrap section personal-preview-layout"><figure><img src={asset("/photos/image6.jpeg")} alt="何丽江在展览中欣赏画作" width="956" height="1274" loading="lazy"/></figure><div><span className="eyebrow">02 / THE PERSONAL SIDE</span><h2>工作之外，<br/><em>还有生活。</em></h2><p>一个慢热的 INFJ，浪漫的双鱼座。<br/>旅行、户外、看展、拼豆，<br/>还有和胖虎一起散步的小日常。</p><a className="pill" href={asset("/about/")}>翻开「关于我」 <ArrowUpRight size={16}/></a></div></div></section>
+        <section className="personal-preview"><div className="wrap section personal-preview-layout"><figure><img src={asset("/photos/image6.jpeg")} alt="何丽江在展览中欣赏画作" width="956" height="1274" loading="lazy"/></figure><div><span className="eyebrow">02 / THE PERSONAL SIDE</span><h2>走进山野<br/><em>也走进生活</em></h2><p>一个慢热的 INFJ，浪漫的双鱼座。<br/>旅行、户外、看展、拼豆，<br/>还有和胖虎一起散步的小日常。</p><a className="pill" href={asset("/about/")}>翻开「关于我」 <ArrowUpRight size={16}/></a></div></div></section>
       </> : <>
       <div className="ribbon" aria-hidden="true"><div>{[0, 1].map(i => <span key={i}>走进山野 <i>✳</i> 感受日常 <i>✳</i> 保持好奇 <i>✳</i> 认真生活 <i>✳</i> 慢慢认识 <i>✳</i> 自在一点 <i>✳</i> </span>)}</div></div>
       <section className="about section wrap" id="about">

@@ -1,12 +1,12 @@
 # 何丽江 · 慢慢生活，保持好奇
 
-何丽江的独立个人网站。参考 Calmco 示例图的全屏照片、大幅姓名、深棕与奶油色、细线条和留白，用原创页面代码呈现技能首页与独立的个人生活页。
+何丽江的独立个人网站。参考用户 2026 年 11 月 11 日提供的页面截图，采用奶油色外框、摄影封面、左侧姓名卡片、克制的矩形按钮，以及从生活照片中选取的橄榄绿和暖棕色调，用原创页面代码呈现技能首页与独立的个人生活页。
 
 - 技能首页：https://rikahe0303-bot.github.io/rika-personal-site/
 - 关于我：https://rikahe0303-bot.github.io/rika-personal-site/about/
 - 像素短片：https://rikahe0303-bot.github.io/rika-personal-site/video/
 - 源码：https://github.com/rikahe0303-bot/rika-personal-site
-- 视觉参考：https://www.framer.com/marketplace/templates/calmco/
+- 当前视觉参考：用户提供的沙龙主题版式截图，仅参考布局，不使用其中的品牌、人物或浏览器外壳。
 - 个人说明书：https://my.feishu.cn/wiki/PwFMwXy47i7csPkxGR7cD1k86Pf
 
 使用 Next.js、React、TypeScript 和 Tailwind CSS，静态部署到 GitHub Pages。页面独立运行，使用何丽江提供的九张生活照片，不嵌套 Framer 或其他网页，也不依赖模板的付费源码。
@@ -36,7 +36,8 @@ npm run build:pages
 - `app/page.tsx`：技能首页入口与页面元数据。
 - `app/about/page.tsx`：个人生活页入口与页面元数据。
 - `app/components/personal-site.tsx`：两页共用导航、页面内容、相册和电话交互。
-- `app/globals.css`：响应式布局、配色、字体和减少动态效果设置。
+- `app/globals.css`：基础响应式布局、字体和交互样式。
+- `app/atelier.css`：新版摄影封面、自然配色、矩形按钮及手机排版。
 - `app/layout.tsx`：网页标题、简介和图标。
 - `public/photos/`：九张本地生活照片。
 - `public/favicon.svg`：站点图标。
@@ -60,3 +61,5 @@ npm run build:pages
 - 动画尊重系统的减少动态效果设置。
 
 网站不收集访客数据。2026 年 11 月 10 日依据用户提供的《何丽江个人说明.pptx》（9 页）补充昵称“水水”、个人身份、相处方式、经历、社交分享链接与三张生活照片。年龄 26 岁为该资料中的自述，未推算出生日期。IP 操盘手、情感陪伴师为用户自我介绍，不另行添加资质、服务承诺或客户评价。原始 PPT 不随源码发布；新增照片从 PPT 提取并压缩为网页图片。飞书链接保留为外部参考入口，本次内容更新依据本地 PPT，而非在线飞书同步。
+
+本次更新为网站版式与配色调整。指定的 AGENTS.md 主要约束 Remotion 视频制作；网站借鉴统一风格、减少装饰、避免遮挡人物的原则。未修改或重新渲染已有视频，视频编码与平台安全区不适用于网页布局。
