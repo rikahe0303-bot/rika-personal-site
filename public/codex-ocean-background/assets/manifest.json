@@ -1,0 +1,13 @@
+{
+  "checkedAt": "2026-11-14",
+  "license": "Pexels License",
+  "licenseUrl": "https://www.pexels.com/license/",
+  "usage": "Codex 写实浅海透明背景层；素材作为软件中的组成部分使用，不作为独立素材转售。",
+  "items": [
+    {"id":"bg-01","kind":"background","title":"Aerial View of Tropical Coral Reef Waters","creator":"Sergey Guk","sourceUrl":"https://www.pexels.com/video/aerial-view-of-tropical-coral-reef-waters-36379812/","localPath":"assets/backgrounds/bg-01.mp4","attributionRequired":false},
+    {"id":"bg-02","kind":"background","title":"Aerial View of Turquoise Ocean Waters","creator":"Sergey Guk","sourceUrl":"https://www.pexels.com/video/aerial-view-of-turquoise-ocean-waters-36658349/","localPath":"assets/backgrounds/bg-02.mp4","attributionRequired":false},
+    {"id":"bg-03","kind":"background","title":"Transparent Sea near Shore","creator":"Francesco Ungaro","sourceUrl":"https://www.pexels.com/video/transparent-sea-near-shore-12883190/","localPath":"assets/backgrounds/bg-03.mp4","attributionRequired":false},
+    {"id":"bg-04","kind":"background","title":"Drone View of Rocks in Shallow Turquoise Water","creator":"youtube ANjoytrips","sourceUrl":"https://www.pexels.com/video/drone-view-of-rocks-in-shallow-turquoise-water-12738229/","localPath":"assets/backgrounds/bg-04.mp4","attributionRequired":false},
+    {"id":"fish-school","kind":"encounter","title":"Dazzling Sardine Swarm in Pristine Blue Ocean","creator":"JUN HO LEE","sourceUrl":"https://www.pexels.com/video/dazzling-sardine-swarm-in-pristine-blue-ocean-35881802/","localPath":"assets/encounters/fish-school.mp4","attributionRequired":false}
+  ]
+}
