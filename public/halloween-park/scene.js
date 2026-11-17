@@ -99,7 +99,7 @@ let mx=0,my=0,introActive=true,fireworkEpoch=-3;addEventListener('pointermove',e
 addEventListener('pointerdown',()=>{introActive=false;fireworkEpoch=clock.elapsedTime});addEventListener('wheel',()=>introActive=false,{passive:true});
 const keys=new Set();addEventListener('keydown',e=>{keys.add(e.key.toLowerCase());introActive=false});addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));
 const moveForward=new THREE.Vector3(),moveRight=new THREE.Vector3();
-const clock=new THREE.Clock();function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.03),t=clock.elapsedTime;if(introActive){const p=Math.min(1,t/8),ease=1-Math.pow(1-p,3);camera.position.z=32-ease*7;if(p===1)introActive=false}carousel.rotation.y=t*.105;horses.forEach((o,i)=>o.rig.position.y=3.3+Math.sin(t*1.25+o.phase)*.34);wheel.rotation.z=-t*.075;ferrisCabins.forEach(c=>c.rotation.z=-wheel.rotation.z);hourHand.rotation.z=-t*.025;minuteHand.rotation.z=-t*.13;bulbWarm.opacity=.7+Math.sin(t*3.1)*.25;bulbCold.opacity=.65+Math.sin(t*2.4+1.7)*.3;fireworks.forEach((fw,f)=>{const age=(t-fireworkEpoch-fw.delay+12)%12,burst=Math.max(0,Math.min(1,age/1.1)),fade=age<1.1?Math.sin(burst*Math.PI):0;const pa=fw.pts.geometry.attributes.position.array;for(let i=0;i<fw.dirs.length;i++){const v=fw.dirs[i];pa[i*3]=v.x*burst*7;pa[i*3+1]=v.y*burst*7-burst*burst*1.5;pa[i*3+2]=v.z*burst*7}fw.pts.geometry.attributes.position.needsUpdate=true;fw.pts.material.opacity=fade*.85});const a=pg.attributes.position.array;for(let i=0;i<N;i++){a[i*3+1]+=.006+seed[i]*.0005;a[i*3]+=(mx*.0025)*Math.sin(seed[i]+t);a[i*3+2]+=(my*.0025)*Math.cos(seed[i]+t);if(a[i*3+1]>17)a[i*3+1]=-.5}pg.attributes.position.needsUpdate=true;particles.rotation.y=-t*.008;key.intensity=275+Math.sin(t*.7)*15;rim.intensity=92+Math.sin(t*1.1)*10;if(keys.size){camera.getWorldDirection(moveForward);moveForward.y=0;moveForward.normalize();moveRight.crossVectors(moveForward,camera.up).normalize();const step=dt*5.2,delta=new THREE.Vector3();if(keys.has('w')||keys.has('arrowup'))delta.addScaledVector(moveForward,step);if(keys.has('s')||keys.has('arrowdown'))delta.addScaledVector(moveForward,-step);if(keys.has('a')||keys.has('arrowleft'))delta.addScaledVector(moveRight,-step);if(keys.has('d')||keys.has('arrowright'))delta.addScaledVector(moveRight,step);camera.position.add(delta);controls.target.add(delta)}controls.update();composer.render(dt)}
+const clock=new THREE.Clock();function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.03),t=clock.elapsedTime;if(introActive){const p=Math.min(1,t/8),ease=1-Math.pow(1-p,3);camera.position.z=32-ease*7;if(p===1)introActive=false}carousel.rotation.y=t*.105;horses.forEach((o,i)=>o.rig.position.y=3.3+Math.sin(t*1.25+o.phase)*.34);wheel.rotation.z=-t*.075;ferrisCabins.forEach(c=>c.rotation.z=-wheel.rotation.z);hourHand.rotation.z=-t*.025;minuteHand.rotation.z=-t*.13;bulbWarm.opacity=.7+Math.sin(t*3.1)*.25;bulbCold.opacity=.65+Math.sin(t*2.4+1.7)*.3;fireworks.forEach((fw,f)=>{const age=(t-fireworkEpoch-fw.delay+12)%12,burst=Math.max(0,Math.min(1,age/1.1)),fade=age<1.1?Math.sin(burst*Math.PI):0;const pa=fw.pts.geometry.attributes.position.array;for(let i=0;i<fw.dirs.length;i++){const v=fw.dirs[i];pa[i*3]=v.x*burst*7;pa[i*3+1]=v.y*burst*7-burst*burst*1.5;pa[i*3+2]=v.z*burst*7}fw.pts.geometry.attributes.position.needsUpdate=true;fw.pts.material.opacity=fade*.85});const a=pg.attributes.position.array;for(let i=0;i<N;i++){a[i*3+1]+=.006+seed[i]*.0005;a[i*3]+=(mx*.0025)*Math.sin(seed[i]+t);a[i*3+2]+=(my*.0025)*Math.cos(seed[i]+t);if(a[i*3+1]>17)a[i*3+1]=-.5}pg.attributes.position.needsUpdate=true;particles.rotation.y=-t*.008;key.intensity=275+Math.sin(t*.7)*15;rim.intensity=92+Math.sin(t*1.1)*10;if(keys.size){camera.getWorldDirection(moveForward);moveForward.y=0;moveForward.normalize();moveRight.crossVectors(moveForward,camera.up).normalize();const step=dt*5.2,delta=new THREE.Vector3();if(keys.has('w')||keys.has('arrowup'))delta.addScaledVector(moveForward,step);if(keys.has('s')||keys.has('arrowdown'))delta.addScaledVector(moveForward,-step);if(keys.has('a')||keys.has('arrowleft'))delta.addScaledVector(moveRight,-step);if(keys.has('d')||keys.has('arrowright'))delta.addScaledVector(moveRight,step);camera.position.add(delta);controls.target.add(delta)}if(!updateRide(t))controls.update();composer.render(dt)}
 // Rebuild the square around a stone belfry and a moonlit approach.
 const stone=new THREE.MeshStandardMaterial({color:0x514459,roughness:.78});
 const slate=new THREE.MeshStandardMaterial({color:0x201b34,roughness:.58});
@@ -141,6 +141,57 @@ for(const [x,z,s] of [[-3.4,13,1.35],[3.6,12,1.2],[-4.3,10,.68],[4.6,8,.76]]){
  grin.quadraticCurveTo(0,-.43,-.34,-.1);
  lantern.children[3].visible=false;
  detail(lantern,new THREE.ShapeGeometry(grin),pumpkinGlow,0,0,.56);
+}
+// The loop circles the rides outside their footprints.
+const track=new THREE.CatmullRomCurve3([
+ [8,1.8,15],[17,3,9],[21,8,-4],[18,5,-16],[8,9,-23],
+ [-8,6,-24],[-19,3,-14],[-20,7,2],[-13,4,15],[-3,2,19]
+].map(v=>new THREE.Vector3(...v)),true,'centripetal');
+track.arcLengthDivisions=800;
+const up=new THREE.Vector3(0,1,0);
+const sideAt=u=>new THREE.Vector3().crossVectors(track.getTangentAt(u),up).normalize();
+for(const side of [-1,1]){
+ const samples=Array.from({length:180},(_,i)=>track.getPointAt(i/180).addScaledVector(sideAt(i/180),side*.4));
+ scene.add(mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(samples,true),300,.047,6,true),parkGold));
+}
+for(let i=0;i<120;i++){
+ const u=i/120,p=track.getPointAt(u),tangent=track.getTangentAt(u);
+ const tie=detail(scene,new THREE.BoxGeometry(1.12,.09,.16),slate,p.x,p.y-.07,p.z);
+ tie.rotation.y=Math.atan2(tangent.x,tangent.z);
+ if(i%8===0)detail(scene,new THREE.CylinderGeometry(.09,.16,p.y,8),stone,p.x,p.y/2,p.z);
+}
+const car=new THREE.Group();scene.add(car);
+detail(car,new THREE.BoxGeometry(.92,.34,1.36),paleGold,0,.24,0);
+detail(car,new THREE.BoxGeometry(.84,.46,.14),midnight,0,.53,-.49);
+detail(car,new THREE.BoxGeometry(.78,.12,.06),neonPurple,0,.29,.69);
+const rideButton=document.createElement('button');
+rideButton.textContent='乘坐过山车';
+rideButton.style.cssText='position:fixed;z-index:5;right:16px;top:20px;padding:9px 14px;border:1px solid #d8aa68;border-radius:20px;background:#19122bea;color:#fff1ca;cursor:pointer';
+document.body.append(rideButton);
+const savedPosition=new THREE.Vector3(),savedTarget=new THREE.Vector3();
+let rideStart=null;
+function stopRide(){
+ if(rideStart===null)return;
+ rideStart=null;camera.position.copy(savedPosition);controls.target.copy(savedTarget);
+ controls.enabled=true;rideButton.textContent='乘坐过山车';
+}
+rideButton.addEventListener('pointerdown',event=>event.stopPropagation());
+rideButton.addEventListener('click',()=>{
+ if(rideStart!==null){stopRide();return}
+ introActive=false;keys.clear();controls.update();savedPosition.copy(camera.position);savedTarget.copy(controls.target);
+ rideStart=clock.elapsedTime;controls.enabled=false;rideButton.textContent='退出乘坐';
+});
+addEventListener('keydown',event=>{if(event.key==='Escape')stopRide()});
+function updateRide(t){
+ const progress=rideStart===null?0:(t-rideStart)/26;
+ if(progress>=1){stopRide();return false}
+ const point=track.getPointAt(progress),tangent=track.getTangentAt(progress);
+ car.position.copy(point);car.lookAt(point.clone().add(tangent));
+ if(rideStart===null)return false;
+ camera.position.copy(point).addScaledVector(up,.86);
+ const ahead=track.getPointAt((progress+.012)%1).addScaledVector(up,.78);
+ camera.lookAt(ahead);
+ return true;
 }
 animate();setTimeout(()=>document.body.classList.add('ready'),700);
 addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);composer.setSize(innerWidth,innerHeight)});
