@@ -66,6 +66,14 @@ const clockFace=mesh(new THREE.CircleGeometry(.82,48),new THREE.MeshStandardMate
 
 // Warm jack-o'-lanterns line the plaza while the clock tower stays in cold moonlight.
 const pumpkinMat=new THREE.MeshStandardMaterial({color:0x8f2407,roughness:.42,metalness:.08,emissive:0x5f1301,emissiveIntensity:.32});
+const ribbedPumpkin=new THREE.SphereGeometry(.58,32,20);
+const pumpkinPositions=ribbedPumpkin.attributes.position;
+for(let i=0;i<pumpkinPositions.count;i++){
+ const x=pumpkinPositions.getX(i),z=pumpkinPositions.getZ(i);
+ const rib=1+.065*Math.cos(Math.atan2(z,x)*10);
+ pumpkinPositions.setX(i,x*rib);pumpkinPositions.setZ(i,z*rib);
+}
+ribbedPumpkin.computeVertexNormals();
 const pumpkinGlow=new THREE.MeshBasicMaterial({color:0xff9b28,toneMapped:false});
 function pumpkin(x,z,s=1){const g=new THREE.Group();g.position.set(x,.48*s,z);g.scale.setScalar(s);const body=mesh(new THREE.SphereGeometry(.58,20,14),pumpkinMat);body.scale.y=.78;g.add(body);for(const ex of [-.2,.2]){const eye=mesh(new THREE.CircleGeometry(.1,3),pumpkinGlow,.12);eye.position.set(ex,.12,.54);g.add(eye)}const mouth=mesh(new THREE.BoxGeometry(.42,.08,.03),pumpkinGlow,-.17);mouth.position.set(0,-.17,.55);g.add(mouth);const stem=mesh(new THREE.CylinderGeometry(.06,.09,.28,8),castleStone,.58);g.add(stem);scene.add(g);return g}
 [[ -4,9,.8],[4,9,.8],[-5,5,1],[5,5,1],[-6,1,.85],[6,1,.85],[-8,-3,.75],[8,-3,.75],[-5,-8,.7],[5,-8,.7]].forEach(p=>pumpkin(...p));
@@ -88,7 +96,7 @@ const fireworks=[];const fwColors=[0xffcc65,0xd85cff,0x62d9ff];
 for(let f=0;f<3;f++){const count=200,p=new Float32Array(count*3),dirs=[];for(let i=0;i<count;i++){const v=new THREE.Vector3().randomDirection().multiplyScalar(.45+Math.random()*.75);v.y*=.78;dirs.push(v)}const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(p,3));const m=new THREE.PointsMaterial({color:fwColors[f],size:.4,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false,depthTest:false});const pts=new THREE.Points(g,m);pts.renderOrder=5;pts.position.set((f-1)*9,14+f*1.5,-15-f*2);scene.add(pts);fireworks.push({pts,dirs,delay:f*2.7})}
 
 // fireflies
-const N=14000,pos=new Float32Array(N*3),seed=new Float32Array(N),col=new Float32Array(N*3);const c1=new THREE.Color(0xffcf64),c2=new THREE.Color(0xd665ff);
+const N=3200,pos=new Float32Array(N*3),seed=new Float32Array(N),col=new Float32Array(N*3);const c1=new THREE.Color(0xffcf64),c2=new THREE.Color(0xd665ff);
 for(let i=0;i<N;i++){const r=7+Math.pow(Math.random(),.65)*30,a=Math.random()*Math.PI*2;pos[i*3]=Math.cos(a)*r;pos[i*3+1]=Math.random()*17-.5;pos[i*3+2]=Math.sin(a)*r;seed[i]=Math.random()*10;const c=Math.random()>.84?c2:c1;col.set([c.r,c.g,c.b],i*3)}
 const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pos,3));pg.setAttribute('color',new THREE.BufferAttribute(col,3));const pm=new THREE.PointsMaterial({size:.04,vertexColors:true,transparent:true,opacity:.58,blending:THREE.AdditiveBlending,depthWrite:false,sizeAttenuation:true});const particles=new THREE.Points(pg,pm);scene.add(particles);
 // volumetric light cones
@@ -119,8 +127,20 @@ const dial=document.createElement('canvas');dial.width=dial.height=512;
 const ink=dial.getContext('2d');ink.fillStyle='#ffda91';ink.fillRect(0,0,512,512);ink.fillStyle='#321b28';ink.font='33px Georgia';ink.textAlign='center';ink.textBaseline='middle';
 'XII I II III IV V VI VII VIII IX X XI'.split(' ').forEach((n,i)=>{const a=i*Math.PI/6;ink.fillText(n,256+198*Math.sin(a),256-198*Math.cos(a))});
 const dialTexture=new THREE.CanvasTexture(dial);dialTexture.colorSpace=THREE.SRGBColorSpace;
-detail(belfry,new THREE.CircleGeometry(1.04,64),new THREE.MeshBasicMaterial({map:dialTexture}),8.6,.82);
-detail(belfry,new THREE.TorusGeometry(1.06,.055,12,64),paleGold,8.6,.84);
+detail(belfry,new THREE.CircleGeometry(1.04,64),new THREE.MeshBasicMaterial({map:dialTexture}),0,8.6,.82);
+detail(belfry,new THREE.TorusGeometry(1.06,.055,12,64),paleGold,0,8.6,.84);
+for(const side of [-1,1]){
+ for(let level=0;level<3;level++){
+  const arch=new THREE.Shape();
+  arch.moveTo(-.23,0);arch.lineTo(-.23,.65);arch.quadraticCurveTo(-.23,.93,0,1.08);arch.quadraticCurveTo(.23,.93,.23,.65);arch.lineTo(.23,0);
+  detail(belfry,new THREE.ShapeGeometry(arch),windowGlow,side*.9,1.4+level*1.8,.8);
+ }
+}
+for(let row=0;row<27;row++)for(let column=0;column<6;column++){
+ const x=-1.42+column*.55+(row%2)*.22;
+ if(Math.abs(x)<1.1&&row>18&&row<25)continue;
+ detail(belfry,new THREE.BoxGeometry(.47,.018,.016),slate,x,.35+row*.36,.566);
+}
 for(const [angle,length] of [[.7,.56],[-.36,.8]]){
  const hand=new THREE.Group();hand.position.set(0,8.6,.9);hand.rotation.z=angle;belfry.add(hand);
  detail(hand,new THREE.BoxGeometry(.058,length,.045),slate,0,length/2,0);
@@ -134,6 +154,18 @@ for(let i=0;i<420;i++){
  cobbles.setColorAt(i,new THREE.Color().setScalar(.62+.36*(.5+.5*Math.sin(i*127.1))));
 }
 scene.add(cobbles);
+for(const side of [-1,1]){
+ for(let i=0;i<14;i++){
+  const x=side*5,z=12-i*1.6;
+  detail(scene,new THREE.CylinderGeometry(.027,.027,.72,6),paleGold,x,.55,z);
+  detail(scene,new THREE.BoxGeometry(.045,.045,1.55),paleGold,x,.9,z-.78);
+ }
+}
+scene.traverse(object=>{
+ if(object.isMesh&&object.material===pumpkinMat)object.geometry=ribbedPumpkin;
+});
+const plazaFill=new THREE.DirectionalLight(0x91a8e8,.9);
+plazaFill.position.set(-7,12,12);scene.add(plazaFill);
 for(const [x,z,s] of [[-3.4,13,1.35],[3.6,12,1.2],[-4.3,10,.68],[4.6,8,.76]]){
  const lantern=pumpkin(x,z,s);
  const grin=new THREE.Shape();
@@ -144,8 +176,8 @@ for(const [x,z,s] of [[-3.4,13,1.35],[3.6,12,1.2],[-4.3,10,.68],[4.6,8,.76]]){
 }
 // The loop circles the rides outside their footprints.
 const track=new THREE.CatmullRomCurve3([
- [8,1.8,15],[17,3,9],[21,8,-4],[18,5,-16],[8,9,-23],
- [-8,6,-24],[-19,3,-14],[-20,7,2],[-13,4,15],[-3,2,19]
+ [8,1.8,15],[16,5,11],[22,14,1],[23,18,-6],[21,4,-17],
+ [9,3,-25],[-7,11,-26],[-20,6,-18],[-23,3,-4],[-19,8,9],[-9,3,19],[-2,2,20]
 ].map(v=>new THREE.Vector3(...v)),true,'centripetal');
 track.arcLengthDivisions=800;
 const up=new THREE.Vector3(0,1,0);
@@ -166,30 +198,39 @@ detail(car,new THREE.BoxGeometry(.84,.46,.14),midnight,0,.53,-.49);
 detail(car,new THREE.BoxGeometry(.78,.12,.06),neonPurple,0,.29,.69);
 const rideButton=document.createElement('button');
 rideButton.textContent='乘坐过山车';
-rideButton.style.cssText='position:fixed;z-index:5;right:16px;top:20px;padding:9px 14px;border:1px solid #d8aa68;border-radius:20px;background:#19122bea;color:#fff1ca;cursor:pointer';
+rideButton.style.cssText='position:fixed;z-index:5;right:16px;top:20px;padding:12px 16px;border:1px solid #d8aa68;border-radius:24px;background:#19122bea;color:#fff1ca;font-size:14px;cursor:pointer;min-height:44px';
 document.body.append(rideButton);
 const savedPosition=new THREE.Vector3(),savedTarget=new THREE.Vector3();
-let rideStart=null;
+let rideStart=null,rideProgress=0,rideSpeed=4,previousRideTime=0;
+const trackLength=track.getLength();
 function stopRide(){
  if(rideStart===null)return;
- rideStart=null;camera.position.copy(savedPosition);controls.target.copy(savedTarget);
+ rideStart=null;camera.fov=48;camera.updateProjectionMatrix();keys.clear();camera.position.copy(savedPosition);controls.target.copy(savedTarget);
  controls.enabled=true;rideButton.textContent='乘坐过山车';
 }
 rideButton.addEventListener('pointerdown',event=>event.stopPropagation());
 rideButton.addEventListener('click',()=>{
  if(rideStart!==null){stopRide();return}
  introActive=false;keys.clear();controls.update();savedPosition.copy(camera.position);savedTarget.copy(controls.target);
- rideStart=clock.elapsedTime;controls.enabled=false;rideButton.textContent='退出乘坐';
+ rideStart=clock.elapsedTime;previousRideTime=rideStart;rideProgress=0;rideSpeed=4;controls.enabled=false;rideButton.textContent='退出乘坐';
 });
 addEventListener('keydown',event=>{if(event.key==='Escape')stopRide()});
 function updateRide(t){
- const progress=rideStart===null?0:(t-rideStart)/26;
+ if(rideStart!==null){
+  const elapsed=Math.min(t-previousRideTime,.06);previousRideTime=t;
+  const slope=track.getTangentAt(Math.min(rideProgress,.9999)).y;
+  const desired=rideProgress>.94?3:THREE.MathUtils.clamp(10-slope*23,3.8,25);
+  rideSpeed=THREE.MathUtils.damp(rideSpeed,desired,2,elapsed);
+  rideProgress+=rideSpeed*elapsed/trackLength;
+ }
+ const progress=rideStart===null?0:rideProgress;
  if(progress>=1){stopRide();return false}
  const point=track.getPointAt(progress),tangent=track.getTangentAt(progress);
  car.position.copy(point);car.lookAt(point.clone().add(tangent));
  if(rideStart===null)return false;
  camera.position.copy(point).addScaledVector(up,.86);
- const ahead=track.getPointAt((progress+.012)%1).addScaledVector(up,.78);
+ const ahead=track.getPointAt((progress+.009)%1).addScaledVector(up,.86);
+ camera.fov=48+Math.min(8,rideSpeed*.3);camera.updateProjectionMatrix();
  camera.lookAt(ahead);
  return true;
 }
