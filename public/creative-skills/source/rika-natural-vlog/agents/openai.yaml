@@ -1,6 +1,6 @@
 interface:
-  display_name: "真人 Vlog 短片生成（本地适配版）"
-  short_description: "用参考人物和生活场景设计自然光、手持镜头与真实互动的 Vlog"
-  default_prompt: "使用 $rika-natural-vlog 按我的素材和要求完成这项创作。"
+  display_name: 真人 Vlog 短片生成（本地适配版）
+  short_description: 用参考人物和生活场景设计自然光、手持镜头与真实互动的 Vlog
+  default_prompt: 使用 $rika-natural-vlog 按我的素材和要求完成这项创作。
 policy:
   allow_implicit_invocation: true
