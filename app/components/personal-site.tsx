@@ -93,7 +93,6 @@ export default function PersonalSite({ page }: { page: "skills" | "about" }) {
           <a href={asset("/about/")} aria-current={!isHome ? "page" : undefined} onClick={() => setMenuOpen(false)}>关于我</a>
           <a href={isHome ? asset("/about/#journal") : "#journal"} onClick={() => setMenuOpen(false)}>生活相册</a>
           <a href={asset("/video/")} onClick={() => setMenuOpen(false)}>像素短片</a>
-          <a href={asset("/creative-skills/")} onClick={() => setMenuOpen(false)}>创作工具箱</a>
           <a href={asset("/market-radar/")} onClick={() => setMenuOpen(false)}>投资雷达</a>
           <a href="#contact" onClick={() => setMenuOpen(false)}>联系我</a>
         </nav>
@@ -115,7 +114,7 @@ export default function PersonalSite({ page }: { page: "skills" | "about" }) {
           <div className="skills-layout">
             <div className="skills-intro"><span className="editorial-label">WHAT I DO</span><h2 id="skills-title">认真表达<br/><em>用心陪伴</em></h2><p>我是何丽江，也可以叫我水水。<br/>温和，有边界，认真对待每一次交流。</p></div>
             <div className="skill-list">
-              <article className="skill-row"><span className="skill-number">01</span><div><span className="eyebrow">PERSONAL IP</span><h3>IP 操盘手</h3><p>聊聊 IP，也通过抖音和小红书认识我的表达。</p><a className="underlined-link" href="#social">看看我的内容 <ArrowUpRight size={16}/></a> <a className="underlined-link" href={asset("/creative-skills/")}>我的创作工具箱 <ArrowUpRight size={16}/></a></div></article>
+              <article className="skill-row"><span className="skill-number">01</span><div><span className="eyebrow">PERSONAL IP</span><h3>IP 操盘手</h3><p>聊聊 IP，也通过抖音和小红书认识我的表达。</p><a className="underlined-link" href="#social">看看我的内容 <ArrowUpRight size={16}/></a></div></article>
               <article className="skill-row"><span className="skill-number">02</span><div><span className="eyebrow">EMOTIONAL COMPANIONSHIP</span><h3>情感陪伴师</h3><p>认真倾听，陪你梳理情绪。温和有边界，尊重你的选择。</p><a className="underlined-link" href="#contact">找我聊聊 <ArrowUpRight size={16}/></a></div></article>
             </div>
           </div>

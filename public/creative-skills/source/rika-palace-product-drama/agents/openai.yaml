@@ -1,6 +1,0 @@
-interface:
-  display_name: 宫斗商品短剧（本地适配版）
-  short_description: 以原创宫廷剧情的冲突与反转组织商品卖点并输出可拍摄的竖屏脚本
-  default_prompt: 使用 $rika-palace-product-drama 按我的素材和要求完成这项创作。
-policy:
-  allow_implicit_invocation: true

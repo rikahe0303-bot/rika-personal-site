@@ -1,6 +1,0 @@
-interface:
-  display_name: 高燃打戏设计（本地适配版）
-  short_description: 将动作剧情编排成空间清楚、动作有因果且能够剪辑的镜头方案
-  default_prompt: 使用 $rika-action-choreography 按我的素材和要求完成这项创作。
-policy:
-  allow_implicit_invocation: true
