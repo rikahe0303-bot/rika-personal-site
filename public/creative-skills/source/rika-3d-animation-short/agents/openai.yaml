@@ -1,0 +1,6 @@
+interface:
+  display_name: 皮克斯风格动画短片（本地适配版）
+  short_description: 规划富有表情和电影叙事的三维动画短片并保持角色场景连续性
+  default_prompt: 使用 $rika-3d-animation-short 按我的素材和要求完成这项创作。
+policy:
+  allow_implicit_invocation: true

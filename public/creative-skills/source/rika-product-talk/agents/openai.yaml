@@ -1,0 +1,6 @@
+interface:
+  display_name: 短视频带货口播（本地适配版）
+  short_description: 从真实卖点与使用场景写出自然可信、可拍摄的商品口播和画面脚本
+  default_prompt: 使用 $rika-product-talk 按我的素材和要求完成这项创作。
+policy:
+  allow_implicit_invocation: true
